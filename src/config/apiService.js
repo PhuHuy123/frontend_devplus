@@ -1,5 +1,9 @@
-import axios from "../axios";
+import axios from "axios";
+
+const getApiRoadTo =()=>{
+  return axios.get("/roadtos")
+}
 
 export {
-    
+  getApiRoadTo,
 };
