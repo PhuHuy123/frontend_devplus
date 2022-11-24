@@ -1,0 +1,45 @@
+.card {
+    box-shadow: 0 0 10px #cdcdcd;
+    margin-top: 25px;
+    margin-bottom: 15px;
+
+    .card-header {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        color: #4e73df;
+        font-weight: 700;
+    }
+
+    td>button {
+        margin: 0 5px;
+    }
+    tr .check{
+        width: 40px;
+    }
+    td>img{
+        width: 150px;
+    }
+
+    .card-header>.rightBtn {
+        float: right;
+        margin-right: 5px;
+    }
+}
+
+.modal-content {
+    border: none !important;
+    box-shadow: 0 0 5px #cdcdcd;
+}
+
+.modal-header {
+    h5 {
+        color: #4e73df;
+        font-weight: 700;
+    }
+}
+
+.page-content {
+    padding: 30px;
+    height: 92vh;
+    overflow: scroll;
+}
