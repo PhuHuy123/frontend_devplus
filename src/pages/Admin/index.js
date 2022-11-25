@@ -40,6 +40,21 @@ const privateRoutes = [
     title: "Admin DevPlus",
     component: lazy(() => import("@app/pages/Admin/EduProgram/edit")),
   },
+  {
+    path: PRIVATE_ROUTE.IMAGE_SLIDERS,
+    title: "Admin DevPlus",
+    component: lazy(() => import("@app/pages/Admin/ImageBar")),
+  },
+  {
+    path: PRIVATE_ROUTE.IMAGE_SLIDERS_CREATE,
+    title: "Admin DevPlus",
+    component: lazy(() => import("@app/pages/Admin/ImageBar/create")),
+  },
+  {
+    path: PRIVATE_ROUTE.IMAGE_SLIDERS_EDIT,
+    title: "Admin DevPlus",
+    component: lazy(() => import("@app/pages/Admin/ImageBar/edit")),
+  },
 ];
 function Admin() {
   return (

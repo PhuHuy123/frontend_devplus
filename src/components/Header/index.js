@@ -2,8 +2,10 @@ import "./Header.scss";
 // import Modal from "../Modal";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import {getImageNavbar} from '@app/config/apiService';    
-import close from "@app/assets/images/close.webp"
+import {getApiSlideImage} from '@app/config/apiService';    
+import close from "@app/assets/images/close.webp";
+import logo from "@app/assets/images/logo.webp";
+import map from "@app/assets/images/map.webp";
 
 const Header = () => {
   const [image, setImage] = useState([])
@@ -13,7 +15,7 @@ const Header = () => {
   }, [])
 
   const arrayApiImage = async () => {
-    let res = await getImageNavbar();
+    let res = await getApiSlideImage();
     if (res && res.data && res.data.length > 0) {
       setImage(res.data)
     }
@@ -25,7 +27,7 @@ const Header = () => {
           <input type="checkbox" className="click_menu" hidden id="click-menu" />
           <div className="row y-middle">
             <div className="col-lg-2 logo">
-              <img alt="one" src="https://devplus.edu.vn/assets/images/devplus/Artboard_2.png" />
+              <img alt="one" src={logo} />
             </div>
             <div className="col-lg-9 text-end m-menu">
               <nav className="rs-menu-area rs-menu">
@@ -90,7 +92,7 @@ const Header = () => {
                   </label>
                 </div>
                 <div className="canvas-logo">
-                  <img src="https://devplus.edu.vn/assets/images/devplus/Artboard_2.png" alt="logo" />
+                  <img src={logo} alt="logo" />
                 </div>
                 <div className="offcanvas-text">
                   <p>
@@ -100,10 +102,10 @@ const Header = () => {
                   </p>
                 </div>
                 <div className="offcanvas-gallery">
-                  {image.map(item=>
-                  <div className="gallery-img" key={item.id}>
+                  {image.map((item,index)=>
+                  <div className="gallery-img" key={index}>
                     <div
-                      onClick={()=>setNumberSlide(item.id)}
+                      onClick={()=>setNumberSlide(index)}
                       className="image-popup"
                       type="button"
                       data-bs-toggle="modal"
@@ -115,7 +117,7 @@ const Header = () => {
                   )}
                 </div>
                 <div className="map-img">
-                  <img alt="one" src="https://devplus.edu.vn/assets/images/map.png" />
+                  <img alt="one" src={map} />
                 </div>
                 <div className="m_fb">
                   <a
@@ -131,7 +133,7 @@ const Header = () => {
         </div>
       </header>
       <div
-        className="modal fade"
+        className="modal fade modal-slide-image"
         id="exampleModal"
         tabIndex="-1"
         aria-labelledby="exampleModalLabel"
@@ -151,8 +153,8 @@ const Header = () => {
               data-bs-touch="false"
             >
               <div className="carousel-inner">
-                {image.map(item=>
-                    <div className={numberSlide===item.id?"carousel-item active":"carousel-item"} key={item.id}>
+                {image.map((item, index)=>
+                    <div className={numberSlide===index?"carousel-item active":"carousel-item"} key={index}>
                       <img
                         src={item.image}
                         className="d-block w-100"

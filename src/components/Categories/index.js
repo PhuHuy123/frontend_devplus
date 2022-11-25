@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {getImageNavbar} from '@app/config/apiService'; 
+import {getApiSkills} from '@app/config/apiService'; 
 
 const Categories = () => {
   const [data, setData] = useState([])
@@ -8,7 +8,7 @@ const Categories = () => {
   }, [])
 
   const arrayApiData = async () => {
-    let res = await getImageNavbar();
+    let res = await getApiSkills();
     if (res && res.data && res.data.length > 0) {
       setData(res.data)
     }
@@ -29,13 +29,13 @@ const Categories = () => {
             <div className="cate-item row">
               <div className="cate-img col-md-4 col-sm-4">
                 <img
-                  src={item.img}
+                  src={item.image}
                   alt={item.name}
                 />
               </div>
               <div className="cate-item-text col-md-8 col-sm-8">
-                <h4>{item.title}</h4>
-                <p>{item.content}</p>
+                <h4>{item.name}</h4>
+                <p>{item.description}</p>
               </div>
             </div>
           </div>
