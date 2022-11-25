@@ -1,15 +1,22 @@
 import { Link } from "react-router-dom";
 import { getApiSkills, deleteApiSkills } from "@app/config/apiService";
-import { useState,useEffect } from "react";
+import { toast } from "react-toastify";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 const Show = () => {
   const [data, setData] = useState( [] ); 
   const [del, setDel] = useState( null );
+  const navigate = useNavigate();
+
   const handleDelete = async () => {
-    const response = await deleteApiSkills( {
-      _id: del
-    }).catch((err) => {
+    const response = await deleteApiSkills( del).catch((err) => {
       console.log("ERROR", err);
-    });
+    } );
+    if ( response ) {
+      toast.success( "Deleted Successfully!" );
+      window.location.reload();
+    }
+
   }
     useEffect(() => {
       fetchData();

@@ -2,24 +2,56 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { getValue } from "@testing-library/user-event/dist/utils";
+import { getApiSkillById, putApiSkills } from "@app/config/apiService";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import Loader from "../Loader";
+
 const Edit = ( props ) => {
-const { id}  = useParams();
+  const [loader, setLoader] = useState(true)
+  const [img, setImg] = useState()
+  const { id } = useParams();
+  const navigate = useNavigate();
+  
   const {
     register,
     handleSubmit,
+    setValue ,
     formState: { errors },
   } = useForm({
     mode: "onSubmit",
-    defaultValues: {
-      name: "",
-    },
-  } );
-  useEffect(() => {
-  }, []);
- ;
-  const onSubmit = (data) => {
+
+  });
+  useEffect( () => {
+    loadData();
+  }, [] );
+  
+  const loadData = async () => {
+    const res = await getApiSkillById(id).catch((err) => {
+        console.log("ERROR", err);
+    } );
+    setValue( 'name', res.data.name);
+    setValue( "description", res.data.description );
+    setValue("image", res.data.image);
+    setLoader( false );
+    setImg(res.data.image)
+    } ;
+  
+  const onSubmit = async ( data ) => {
+    var formData = new FormData();
     
+    setLoader( true );
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("images", data.image[0]);
+    const response = await putApiSkills(formData, id).catch((err) => {
+      console.log("ERROR", err);
+    });
+    if (response) {
+      toast.success("Updated Successfully!");
+      navigate("/admin/edu-program");
+      setLoader(false);
+    }
   };
 
   return (
@@ -40,16 +72,22 @@ const { id}  = useParams();
               <label htmlFor="exampleInputEmail1" className="form-label">
                 Title
               </label>
-              <input type="text" className="form-control" />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">
-                Content
-              </label>
               <input
                 type="text"
                 className="form-control"
                 {...register("name", {
+                  required: "Please enter your first name.",
+                })}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="exampleInputEmail1" className="form-label">
+                Description
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                {...register("description", {
                   required: "Please enter your first name.",
                 })}
               />
@@ -61,13 +99,17 @@ const { id}  = useParams();
               <input
                 type="file"
                 className="form-control"
-                {...register("file", {
+                {...register("image", {
                   required: "Please enter your first name.",
                 })}
               />
             </div>
+            <div className="mb-3 show-image">
+              <img width="300px" src={img} alt="no image" />
+            </div>
+
             <button type="submit" className="btn btn-primary">
-              Create
+              Update
             </button>
           </form>
         </div>
@@ -128,6 +170,7 @@ const { id}  = useParams();
           </div>
         </div>
       </div>
+      {loader && <Loader />}
     </div>
   );
 };

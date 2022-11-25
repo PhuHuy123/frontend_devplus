@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
-import { getApiOurMain, deleteApiSkills } from "@app/config/apiService";
+import { getApiOurMain, deleteApiOurMain } from "@app/config/apiService";
+import { toast } from "react-toastify";
 import { useState,useEffect } from "react";
 const Show = () => {
   const [data, setData] = useState( [] ); 
   const [del, setDel] = useState( null );
   const handleDelete = async () => {
-    const response = await deleteApiSkills( {
-      _id: del
-    }).catch((err) => {
+    const response = await deleteApiOurMain( del).catch((err) => {
       console.log("ERROR", err);
-    });
+    } );
+    if (response) {
+      toast.success("Deleted Successfully!");
+      window.location.reload();
+    }
   }
     useEffect(() => {
       fetchData();
