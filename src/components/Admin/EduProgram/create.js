@@ -27,7 +27,7 @@ const Create = () => {
     var bodyFormData = new FormData();
     bodyFormData.append( "name", data.name );
     bodyFormData.append("description", data.description);
-    bodyFormData.append("images", data.image[0]);
+    bodyFormData.append("image", data.image[0]);
     const response = await postApiSkills(bodyFormData).catch((err) => {
       console.log("ERROR", err);
     } );
@@ -97,7 +97,7 @@ const Create = () => {
       { loader && (
         <div className="d-flex justify-content-center loader">
           <div className="spinner-border loader-icon" role="status">
-            <span className="visually-hidden">Loading...</span>
+            <span class="visually-hidden">Loading...</span>
           </div>
         </div>
       ) }

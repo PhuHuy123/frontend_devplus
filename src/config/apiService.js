@@ -4,14 +4,14 @@ const getApiSkills = () => {
     
 }
 const postApiSkills = ( data ) => {
-    return axios.post("skills", data, {
+    return axios.post("/skills", data, {
       headers: { "Content-Type": "multipart/form-data" },
     });
 }
 const deleteApiSkills = ( id ) => {
   return axios.delete(`/skills/${id}`);
 };
-const putApiSkills = (data, id) => {
+const putApiSkills = ( data, id ) => {
   return axios.post("skills/" + id, data, {
     headers: { "Content-Type": "multipart/form-data" },
   });
@@ -29,6 +29,12 @@ const postApiConcerns = (data) => {
 };
 const deleteApiConcerns = (data) => {
   return axios.delete(`/concerns/${data}`);
+};
+const getApiConcernById = (id) => {
+  return axios.get(`/concerns/${id}`);
+};
+const putApiConcernById = (data, id) => {
+  return axios.put(`/concerns/${id}`, data);
 };
 
 //Road To be DevPlus
@@ -55,9 +61,23 @@ const postApiRoadTo = (data) => {
 const deleteApiRoadTo = (data) => {
   return axios.delete(`/roadtos/${data}`);
 };
+const getApiRoadToById = (id) => {
+  return axios.get(`/roadtos/${id}`);
+};
+const putApiRoadToById = ( data, id ) => {
+  return axios.put( `/roadtos/${id}`, data);
+};
 //Road To be DevPlus
 const getApiOurMain = () => {
   return axios.get("/ourmains");
+};
+const getApiOurMainById = (id) => {
+  return axios.get(`/ourmains/${id}`);
+};
+const putApiOurMain = (data, id) => {
+  return axios.post(`ourmains/${id}`, data, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 };
 const postApiOurMain = (data) => {
   return axios.post("/ourmains", data);
@@ -65,12 +85,21 @@ const postApiOurMain = (data) => {
 const deleteApiOurMain = (data) => {
   return axios.delete(`/ourmains/${data}`);
 };
+
 //Saying
 const getApiAlumnies = () => {
   return axios.get("/alumnies");
 };
+const getApiAlumniById = (id) => {
+  return axios.get(`/alumnies/${id}`);
+};
 const postApiAlumnies = (data) => {
   return axios.post("/alumnies", data);
+};
+const putApiAlumnies = (data, id) => {
+  return axios.post(`alumnies/${id}`, data, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 };
 const deleteApiAlumnies = (data) => {
   return axios.delete(`alumnies/${data}`);
@@ -97,4 +126,12 @@ export {
   deleteApiConcerns,
   deleteApiAlumnies,
   deleteApiOurMain,
+  getApiAlumniById,
+  getApiRoadToById,
+  putApiRoadToById,
+  getApiOurMainById,
+  putApiOurMain,
+  getApiConcernById,
+  putApiConcernById,
+  putApiAlumnies,
 };

@@ -2,23 +2,51 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { getValue } from "@testing-library/user-event/dist/utils";
+import { getApiOurMainById, putApiOurMain } from "@app/config/apiService";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import Loader from "../Loader";
 const Edit = ( props ) => {
-const { id}  = useParams();
+const [loader, setLoader] = useState(true);
+const [img, setImg] = useState();
+const { id } = useParams();
+const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     mode: "onSubmit",
-    defaultValues: {
-      name: "",
-    },
-  } );
+  });
   useEffect(() => {
+    loadData();
   }, []);
- ;
-  const onSubmit = (data) => {
+
+  const loadData = async () => {
+    const res = await getApiOurMainById(id).catch((err) => {
+      console.log("ERROR", err);
+    });
+    setValue("name", res.data.name);
+    setValue("image", res.data.image);
+    setLoader(false);
+    setImg(res.data.image);
+  };
+
+  const onSubmit = async (data) => {
+    var formData = new FormData();
+
+    setLoader(true);
+    formData.append("name", data.name);
+    formData.append("images", data.image[0]);
+    const response = await putApiOurMain(formData, id).catch((err) => {
+      console.log("ERROR", err);
+    } );
+    if (response) {
+      toast.success("Updated Successfully!");
+      navigate("/admin/our-main-campus");
+      setLoader(false);
+    }
   };
 
   return (
@@ -39,12 +67,6 @@ const { id}  = useParams();
               <label htmlFor="exampleInputEmail1" className="form-label">
                 Title
               </label>
-              <input type="text" className="form-control" />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">
-                Content
-              </label>
               <input
                 type="text"
                 className="form-control"
@@ -60,73 +82,21 @@ const { id}  = useParams();
               <input
                 type="file"
                 className="form-control"
-                {...register("file", {
+                {...register("image", {
                   required: "Please enter your first name.",
                 })}
               />
             </div>
+            <div className="mb-3 show-image">
+              <img width="300px" src={img} alt="no image" />
+            </div>
             <button type="submit" className="btn btn-primary">
-              Create
+              Update
             </button>
           </form>
         </div>
       </div>
-
-      <div
-        className="modal fade"
-        id="exampleModal"
-        tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Create Slider
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="mb-3">
-                  <label htmlFor="exampleInputEmail1" className="form-label">
-                    Title
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Type your slider title"
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="exampleInputPassword1" className="form-label">
-                    Image
-                  </label>
-                  <input type="file" className="form-control" />
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      {loader && <Loader />}
     </div>
   );
 };
