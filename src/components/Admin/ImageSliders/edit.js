@@ -2,24 +2,56 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-import { getValue } from "@testing-library/user-event/dist/utils";
-const Edit = ( props ) => {
-const { id}  = useParams();
+// import { getValue } from "@testing-library/user-event/dist/utils";
+import { getApiSlideImageById, putApiSlideImage } from "@app/config/apiService";
+import Loader from "../Loader";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
+const Edit = () => {
+  const [loader, setLoader] = useState(true)
+  const [img, setImg] = useState()
+  const { id } = useParams();
+  const navigate = useNavigate();
+  
   const {
     register,
     handleSubmit,
+    setValue ,
     formState: { errors },
   } = useForm({
     mode: "onSubmit",
-    defaultValues: {
-      name: "",
-    },
-  } );
-  useEffect(() => {
-  }, []);
- ;
-  const onSubmit = (data) => {
+  });
+  useEffect( () => {
+    loadData();
+  }, [] );
+  
+  const loadData = async () => {
+    const res = await getApiSlideImageById(id).catch((err) => {
+        console.log("ERROR", err);
+    } );
+    setValue( 'name', res.data.name);
+    // setValue("image", res.data.image);
+    setLoader( false );
+    setImg(res.data.image)
+    } ;
+  
+  const onSubmit = async ( data ) => {
+    
+    setLoader( true );
+      var formData = new FormData();
+      formData.append("name", data.name);
+      formData.append("images", data.image[0]);
+      const res = await putApiSlideImage(formData, id).catch((err) => {
+        console.log("ERROR", err);
+      });
+    if (res) {
+      toast.success("Updated Successfully!");
+      navigate("/admin/image-sliders");
+      setLoader(false);
+    }
   };
+
 
   return (
     <div className="content">
@@ -28,7 +60,7 @@ const { id}  = useParams();
           Edit
           <Link to="/admin/edu-program" className="rightBtn">
             <button type="button" className="btn btn-success">
-              <i className="fa-solid fa-plus"></i> Back
+            <i className="fa-solid fa-arrow-right"></i> Back
             </button>
           </Link>
         </div>
@@ -37,20 +69,12 @@ const { id}  = useParams();
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="mb-3">
               <label htmlFor="exampleInputEmail1" className="form-label">
-                Title
+                Name
               </label>
-              <input type="text" className="form-control" />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">
-                Content
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                {...register("name", {
-                  required: "Please enter your first name.",
-                })}
+              <input type="text" className="form-control" 
+                  {...register("name", {
+                    required: "Please enter your first name.",
+                  })}
               />
             </div>
             <div className="mb-3">
@@ -60,10 +84,11 @@ const { id}  = useParams();
               <input
                 type="file"
                 className="form-control"
-                {...register("file", {
-                  required: "Please enter your first name.",
-                })}
+                {...register("image")}
               />
+            </div>
+            <div className="mb-3 show-image">
+              <img width="300px" src={img} alt="no image" />
             </div>
             <button type="submit" className="btn btn-primary">
               Create
@@ -127,6 +152,7 @@ const { id}  = useParams();
           </div>
         </div>
       </div>
+      {loader && <Loader />}
     </div>
   );
 };

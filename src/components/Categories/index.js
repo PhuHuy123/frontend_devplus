@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import {getApiSkills} from '@app/config/apiService'; 
+import {getApiSkills} from '@app/config/apiService';
+import './Categories.scss'
 
 const Categories = () => {
   const [data, setData] = useState([])
@@ -29,6 +30,7 @@ const Categories = () => {
             <div className="cate-item row">
               <div className="cate-img col-md-4 col-sm-4">
                 <img
+                  className="cate-img-responsive"   
                   src={item.image}
                   alt={item.name}
                 />

@@ -12,7 +12,7 @@ const deleteApiSkills = ( id ) => {
   return axios.delete(`/skills/${id}`);
 };
 const putApiSkills = ( data, id ) => {
-  return axios.post("skills/" + id, data, {
+  return axios.post(`skills/${id}`, data, {
     headers: { "Content-Type": "multipart/form-data" },
   });
 };
@@ -34,7 +34,7 @@ const getApiConcernById = (id) => {
   return axios.get(`/concerns/${id}`);
 };
 const putApiConcernById = (data, id) => {
-  return axios.put(`/concerns/${id}`, data);
+  return axios.post(`/concerns/${id}`, data);
 };
 
 //Road To be DevPlus
@@ -51,7 +51,14 @@ const postApiSlideImage = ( data ) => {
     headers: { "Content-Type": "multipart/form-data" },
   });
 }
-
+const getApiSlideImageById = (id) => {
+  return axios.get(`/menubars/${id}`);
+};
+const putApiSlideImage = (data, id) => {
+  return axios.post(`menubars/${id}`, data, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+};
 const deleteApiSlideImage = ( data ) => {
 return axios.delete(`/menubars/${data}`);
 };
@@ -65,7 +72,7 @@ const getApiRoadToById = (id) => {
   return axios.get(`/roadtos/${id}`);
 };
 const putApiRoadToById = ( data, id ) => {
-  return axios.put( `/roadtos/${id}`, data);
+  return axios.post( `/roadtos/${id}`, data);
 };
 //Road To be DevPlus
 const getApiOurMain = () => {
@@ -134,4 +141,6 @@ export {
   getApiConcernById,
   putApiConcernById,
   putApiAlumnies,
+  getApiSlideImageById,
+  putApiSlideImage,
 };

@@ -62,7 +62,7 @@ const Footer = () => {
               <h4 className="widget-title">OUR CAMPUS</h4>
               <ul className="site-map site-three">
                 {data.map((item)=>(
-                <li>
+                <li key={item._id}>
                   <a href="#">{item.name}</a>
                 </li>
                 ))}

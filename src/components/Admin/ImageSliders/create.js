@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { postApiSlideImage } from "@app/config/apiService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-
+import Loader from "../Loader";
 const Create = () => {
   const [loader, setLoader] = useState( false )
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const Create = () => {
     mode: "onSubmit",
     defaultValues: {
       name: "",
-      description: "",
+      // description: "",
       image: []
     },
   });
@@ -45,7 +45,7 @@ const Create = () => {
             Create image slider
             <Link to="/admin/image-sliders" className="rightBtn">
               <button type="button" className="btn btn-success">
-                <i className="fa-solid fa-plus"></i> Back
+              <i className="fa-solid fa-arrow-right"></i> Back
               </button>
             </Link>
           </div>
@@ -71,7 +71,9 @@ const Create = () => {
                 <input
                   type="file"
                   className="form-control"
-                  {...register("image")}
+                  {...register("image", {
+                    required: "Please enter your first image.",
+                  })}
                 />
               </div>
               <button type="submit" className="btn btn-primary">
@@ -81,13 +83,7 @@ const Create = () => {
           </div>
         </div>
       </div>
-      { loader && (
-        <div className="d-flex justify-content-center loader">
-          <div className="spinner-border loader-icon" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        </div>
-      ) }
+      {loader && <Loader />}
     </>
   );
 };
