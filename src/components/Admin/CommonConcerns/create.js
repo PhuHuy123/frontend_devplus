@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const Create = () => {
-  const [loader, setLoader] = useState( false )
+  const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
 
   const {
@@ -18,25 +18,25 @@ const Create = () => {
     defaultValues: {
       name: "",
       description: "",
-      image: []
     },
   });
-  
-  const onSubmit = async ( data ) => {
-    setLoader(true)
-    var bodyFormData = new FormData();
-    bodyFormData.append("title", data.title);
-    bodyFormData.append("description", data.description);
-    const response = await postApiConcerns(bodyFormData).catch((err) => {
+
+  const onSubmit = async (data) => {
+    setLoader(true);
+
+    const response = await postApiConcerns({
+      title: data.title,
+      description: data.description,
+    }).catch((err) => {
       console.log("ERROR", err);
     });
-    if ( response ) {
+    if (response) {
       toast.success("Created Successfully!");
       navigate("/admin/common-concerns");
       setLoader(false);
-    } 
-    };
-  
+    }
+  };
+
   return (
     <>
       <div className="content">

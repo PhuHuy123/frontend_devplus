@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
-import { getApiConcerns } from "@app/config/apiService";
-import { useState,useEffect } from "react";
+import { getApiConcerns, deleteApiConcerns } from "@app/config/apiService";
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 const Show = () => {
   const [data, setData] = useState( [] ); 
   const [del, setDel] = useState( null );
   const handleDelete = async () => {
-    const response = await getApiConcerns({
-      _id: del,
-    }).catch((err) => {
+    const response = await deleteApiConcerns( del).catch((err) => {
       console.log("ERROR", err);
-    });
+    } );
+    if (response) {
+      toast.success("Deleted Successfully!");
+      window.location.reload();
+    }
   }
     useEffect(() => {
       fetchData();
