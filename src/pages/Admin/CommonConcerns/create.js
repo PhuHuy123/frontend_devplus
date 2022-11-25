@@ -1,7 +1,7 @@
+import Create from "@app/components/Admin/CommonConcerns/create";
 import PageTitle from "@app/components/Admin/PageTitle";
-import Create from "@app/components/Admin/OurMainCampus/create";
 
-const CreateOurManCampus = () => {
+const CreateCommon = () => {
   return (
     <div className="page-content">
       <PageTitle />
@@ -9,4 +9,4 @@ const CreateOurManCampus = () => {
     </div>
   );
 };
-export default CreateOurManCampus;
+export default CreateCommon;

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
-// import { getValue } from "@testing-library/user-event/dist/utils";
+import { getValue } from "@testing-library/user-event/dist/utils";
 const Edit = ( props ) => {
 const { id}  = useParams();
   const {
@@ -15,8 +15,7 @@ const { id}  = useParams();
       name: "",
     },
   } );
-  useEffect( () => {
-    
+  useEffect(() => {
   }, []);
  ;
   const onSubmit = (data) => {
@@ -27,7 +26,7 @@ const { id}  = useParams();
       <div className="card">
         <div className="card-header">
           Edit
-          <Link to="/admin/to-be-a-devplus" className="rightBtn">
+          <Link to="/admin/alumni-saying" className="rightBtn">
             <button type="button" className="btn btn-success">
               <i className="fa-solid fa-plus"></i> Back
             </button>

@@ -1,8 +1,8 @@
 import PageTitle from "@app/components/Admin/PageTitle";
-import Edit from "@app/components/Admin/BeADevPlus/edit";
-import "@app/style/Crud.scss";
+import Edit from "@app/components/Admin/AlumniSaying/edit";
+import '@app/style/Crud.scss';
 
-const EditBeADevPlus = () => {
+const EditAlumniSaying = () => {
   return (
     <div className="page-content">
       <PageTitle />
@@ -10,5 +10,4 @@ const EditBeADevPlus = () => {
     </div>
   );
 };
-export default EditBeADevPlus;
-
+export default EditAlumniSaying;

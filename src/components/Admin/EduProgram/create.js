@@ -27,7 +27,7 @@ const Create = () => {
     var bodyFormData = new FormData();
     bodyFormData.append( "name", data.name );
     bodyFormData.append("description", data.description);
-    bodyFormData.append("image", data.image[0]);
+    bodyFormData.append("images", data.image[0]);
     const response = await postApiSkills(bodyFormData).catch((err) => {
       console.log("ERROR", err);
     } );

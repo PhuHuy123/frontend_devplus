@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { postApiRoadTo } from "@app/config/apiService";
+import { postApiConcerns } from "@app/config/apiService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -25,14 +25,14 @@ const Create = () => {
   const onSubmit = async ( data ) => {
     setLoader(true)
     var bodyFormData = new FormData();
-    bodyFormData.append("name", data.name);
+    bodyFormData.append("title", data.title);
     bodyFormData.append("description", data.description);
-    const response = await postApiRoadTo(bodyFormData).catch((err) => {
+    const response = await postApiConcerns(bodyFormData).catch((err) => {
       console.log("ERROR", err);
     });
     if ( response ) {
       toast.success("Created Successfully!");
-      navigate("/admin/to-be-a-devplus");
+      navigate("/admin/common-concerns");
       setLoader(false);
     } 
     };
@@ -42,8 +42,8 @@ const Create = () => {
       <div className="content">
         <div className="card">
           <div className="card-header">
-            Create Road to be a DevPlus
-            <Link to="/admin/to-be-a-devplus" className="rightBtn">
+            Create Common Concerns
+            <Link to="/admin/common-concerns" className="rightBtn">
               <button type="button" className="btn btn-success">
                 <i className="fa-solid fa-plus"></i> Back
               </button>
@@ -59,7 +59,19 @@ const Create = () => {
                 <input
                   type="text"
                   className="form-control"
-                  {...register("name", {
+                  {...register("title", {
+                    required: "Please enter your first name.",
+                  })}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="exampleInputEmail1" className="form-label">
+                  Description
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  {...register("description", {
                     required: "Please enter your first name.",
                   })}
                 />

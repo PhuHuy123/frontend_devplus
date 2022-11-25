@@ -1,5 +1,5 @@
-import PageTitle from "@app/components/PageTitle";
-import Edit from "@app/components/OurMainCampus/edit";
+import PageTitle from "@app/components/Admin/PageTitle";
+import Edit from "@app/components/Admin/OurMainCampus/edit";
 import '@app/style/Crud.scss';
 
 const EditOurManCampus = () => {
