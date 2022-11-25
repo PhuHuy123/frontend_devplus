@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import {getApiSkills} from '@app/config/apiService'; 
+import {getApiSkills} from '@app/config/apiService';
+import './Categories.scss'
 
 const Categories = () => {
   const [data, setData] = useState([])
@@ -20,7 +21,7 @@ const Categories = () => {
         <section className="row">
           {data.map((item, index)=>(
             <div
-            key={item._id}
+            key={item.id}
             className="col-md-4 cate-card"
             data-aos="fade-up"
             data-aos-duration="1000"
@@ -29,6 +30,7 @@ const Categories = () => {
             <div className="cate-item row">
               <div className="cate-img col-md-4 col-sm-4">
                 <img
+                  className="cate-img-responsive"   
                   src={item.image}
                   alt={item.name}
                 />

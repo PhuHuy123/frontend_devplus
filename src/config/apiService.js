@@ -51,7 +51,14 @@ const postApiSlideImage = ( data ) => {
     headers: { "Content-Type": "multipart/form-data" },
   });
 }
-
+const getApiSlideImageById = (id) => {
+  return axios.get(`/menubars/${id}`);
+};
+const putApiSlideImage = (data, id) => {
+  return axios.post(`menubars/${id}`, data, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+};
 const deleteApiSlideImage = ( data ) => {
 return axios.delete(`/menubars/${data}`);
 };
@@ -134,4 +141,6 @@ export {
   getApiConcernById,
   putApiConcernById,
   putApiAlumnies,
+  getApiSlideImageById,
+  putApiSlideImage,
 };
