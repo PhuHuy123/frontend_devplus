@@ -2,7 +2,22 @@ import iconMail from "@app/assets/images/icons/mail.webp"
 import iconPhone from "@app/assets/images/icons/phone-call.webp"
 import iconMap from "@app/assets/images/icons/map.webp"
 import logo from "@app/assets/images/logo.webp"
+import {getApiOurMain} from '@app/config/apiService';
+import { useState,useEffect } from "react";
+
 const Footer = () => {
+  const [data, setData] = useState([])
+  useEffect(() => {
+    arrApiOurMain();
+  }, [])
+
+  const arrApiOurMain = async () => {
+    await getApiOurMain()
+      .then(res=>{
+        setData(res.data)
+      })
+      .catch(err=> console.log( "ERROR", err ))
+  }
   return (
     <footer className="rs-footer">
       <div className="footer-top">
@@ -46,15 +61,11 @@ const Footer = () => {
             <div className="col-3 footer-widget">
               <h4 className="widget-title">OUR CAMPUS</h4>
               <ul className="site-map site-three">
+                {data.map((item)=>(
                 <li>
-                  <a href="#">One plus (+) Programing foundation</a>
+                  <a href="#">{item.name}</a>
                 </li>
-                <li>
-                  <a href="#">Two plus (++) Skill up and onboard</a>
-                </li>
-                <li>
-                  <a href="#">Three plus (+++) Become a senior</a>
-                </li>
+                ))}
               </ul>
             </div>
             <div className="col-3 footer-widget">

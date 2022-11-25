@@ -1,5 +1,19 @@
-const Popular = () => {
+import {getApiOurMain} from '@app/config/apiService';  
+import { useState,useEffect } from "react";
 
+const Popular = () => {
+  const [data, setData] = useState([])
+  useEffect(() => {
+    arrApiOurMain();
+  }, [])
+
+  const arrApiOurMain = async () => {
+    await getApiOurMain()
+      .then(res=>{
+        setData(res.data)
+      })
+      .catch(err=> console.log( "ERROR", err ))
+  }
   return (
     <div className="popular_course">
     <div className="container">
@@ -11,36 +25,18 @@ const Popular = () => {
         </div>
       </div>
       <div className="row popular_box">
-        <div className="col-md-4 box_mainitem">
+      {data.map((item) =>
+        <div className="col-md-4 box_mainitem" key={item._id}>
           <div className="box_item" data-aos="fade-up" data-aos-duration="3000">
             <div className="box_img">
-              <img src="./images/Campus/plus1.webp" alt="one" />
+              <img src={item.image} alt="one" />
             </div>
             <div className="box_title">
-              <h5>One plus (+) Programing foundation</h5>
+              <h5>{item.name}</h5>
             </div>
           </div>
         </div>
-        <div className="col-md-4 box_mainitem">
-          <div className="box_item" data-aos="fade-up" data-aos-duration="3000">
-            <div className="box_img">
-              <img src="./images/Campus/plus2.webp" alt="one" />
-            </div>
-            <div className="box_title">
-              <h5>Two plus (++) Skill up to to get ready</h5>
-            </div>
-          </div>
-        </div>
-        <div className="col-md-4 box_mainitem">
-          <div className="box_item" data-aos="fade-up" data-aos-duration="3000">
-            <div className="box_img">
-              <img src="./images/Campus/plus3.webp" alt="one" />
-            </div>
-            <div className="box_title">
-              <h5>Three plus (+++) How to become a senior</h5>
-            </div>
-          </div>
-        </div>
+      )}
       </div>
     </div>
   </div>

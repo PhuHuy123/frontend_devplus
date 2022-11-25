@@ -20,7 +20,7 @@ const Categories = () => {
         <section className="row">
           {data.map((item, index)=>(
             <div
-            key={item.id}
+            key={item._id}
             className="col-md-4 cate-card"
             data-aos="fade-up"
             data-aos-duration="1000"
