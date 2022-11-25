@@ -14,6 +14,18 @@ const deleteApiSkills = ( data ) => {
   return axios.delete("/skills", data);
 };
 
+const getApiSkillById = (id) => {
+  return axios.get(`/skills?_id=${id}`);
+};
+//Concerns
+const getApiConcerns = () => {
+  return axios.get("/concerns");
+}
+const postApiConcerns = (data) => {
+  return axios.post("/concerns", data);
+};
+
+//Road To be DevPlus
 const getApiRoadTo = () => {
   return axios.get("/roadtos");
 };
@@ -31,6 +43,24 @@ const postApiSlideImage = ( data ) => {
 const deleteApiSlideImage = ( data ) => {
 return axios.delete("/menubars", data);
 };
+const postApiRoadTo = (data) => {
+  return axios.post("/roadtos", data);
+};
+//Road To be DevPlus
+const getApiOurMain = () => {
+  return axios.get("/ourmains");
+};
+const postApiOurMain = (data) => {
+  return axios.post("/ourmains", data);
+};
+//Saying
+const getApiAlumnies = () => {
+  return axios.get("/alumnies");
+};
+const postApiAlumnies = (data) => {
+  return axios.post("/alumnies", data);
+};
+
 export {
   getApiSkills,
   postApiSkills,
@@ -40,4 +70,12 @@ export {
   getApiSlideImage,
   postApiSlideImage,
   deleteApiSlideImage,
+  getApiSkillById,
+  getApiConcerns,
+  postApiConcerns,
+  postApiRoadTo,
+  getApiOurMain,
+  postApiOurMain,
+  getApiAlumnies,
+  postApiAlumnies,
 };

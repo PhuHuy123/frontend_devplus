@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import { getApiSkills, deleteApiSkills } from "@app/config/apiService";
+import { getApiConcerns } from "@app/config/apiService";
 import { useState,useEffect } from "react";
 const Show = () => {
   const [data, setData] = useState( [] ); 
   const [del, setDel] = useState( null );
   const handleDelete = async () => {
-    const response = await deleteApiSkills( {
-      _id: del
+    const response = await getApiConcerns({
+      _id: del,
     }).catch((err) => {
       console.log("ERROR", err);
     });
@@ -16,9 +16,9 @@ const Show = () => {
     }, []);
 
     const fetchData = async () => {
-      const response = await getApiSkills().catch((err) => {
-        console.log( "ERROR", err );
-      } );
+      const response = await getApiConcerns().catch((err) => {
+        console.log("ERROR", err);
+      });
       setData(response.data);
     };
     
@@ -26,7 +26,7 @@ const Show = () => {
     <div className="content">
       <div className="card">
         <div className="card-header">
-          List Education Program
+          List Common Concerns
           <Link to="create" className="rightBtn">
             <button type="button" className="btn btn-success">
               <i className="fa-solid fa-plus"></i> Add New
@@ -34,7 +34,7 @@ const Show = () => {
           </Link>
         </div>
         <div className="card-body">
-          <h5 className="card-title">All of your slider</h5>
+          <h5 className="card-title">All Common Concerns</h5>
           <table className="table table-bordered">
             <thead>
               <tr>
@@ -43,8 +43,7 @@ const Show = () => {
                 </th>
                 <th scope="col">#</th>
                 <th scope="col">Title</th>
-                <th scope="col">Content</th>
-                <th scope="col">Image</th>
+                <th scope="col">Description</th>
                 <th style={{ width: "15%" }} scope="col">
                   Action
                 </th>
@@ -57,11 +56,8 @@ const Show = () => {
                     <input type="checkbox" />
                   </td>
                   <td>{index + 1}</td>
-                  <td>{item.name}</td>
+                  <td>{item.title}</td>
                   <td>{item.description}</td>
-                  <td>
-                    <img src={item.image} alt="no image" />
-                  </td>
                   <td>
                     <Link to={`edit/${item._id}`}>
                       <button type="button" className="btn btn-primary">

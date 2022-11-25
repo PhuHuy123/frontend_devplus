@@ -1,5 +1,5 @@
-import PageTitle from "@app/components/PageTitle";
-import Show from "@app/components/OurMainCampus";
+import PageTitle from "@app/components/Admin/PageTitle";
+import Show from "@app/components/Admin/OurMainCampus";
 
 const ShowOurManCampus = () => {
     return (

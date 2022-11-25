@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { getApiSkills, deleteApiSkills } from "@app/config/apiService";
+import { getApiAlumnies, deleteApiSkills } from "@app/config/apiService";
 import { useState,useEffect } from "react";
 const Show = () => {
   const [data, setData] = useState( [] ); 
@@ -16,9 +16,9 @@ const Show = () => {
     }, []);
 
     const fetchData = async () => {
-      const response = await getApiSkills().catch((err) => {
-        console.log( "ERROR", err );
-      } );
+      const response = await getApiAlumnies().catch((err) => {
+        console.log("ERROR", err);
+      });
       setData(response.data);
     };
     
@@ -26,7 +26,7 @@ const Show = () => {
     <div className="content">
       <div className="card">
         <div className="card-header">
-          List Education Program
+          List Alumni Saying
           <Link to="create" className="rightBtn">
             <button type="button" className="btn btn-success">
               <i className="fa-solid fa-plus"></i> Add New
@@ -34,7 +34,7 @@ const Show = () => {
           </Link>
         </div>
         <div className="card-body">
-          <h5 className="card-title">All of your slider</h5>
+          <h5 className="card-title">All Content</h5>
           <table className="table table-bordered">
             <thead>
               <tr>
@@ -42,9 +42,10 @@ const Show = () => {
                   <input type="checkbox" />
                 </th>
                 <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Content</th>
+                <th scope="col">Name</th>
+                <th scope="col">Position</th>
                 <th scope="col">Image</th>
+                <th scope="col">Saying</th>
                 <th style={{ width: "15%" }} scope="col">
                   Action
                 </th>
@@ -58,10 +59,11 @@ const Show = () => {
                   </td>
                   <td>{index + 1}</td>
                   <td>{item.name}</td>
-                  <td>{item.description}</td>
+                  <td>{item.position}</td>
                   <td>
                     <img src={item.image} alt="no image" />
                   </td>
+                  <td>{item.saying}</td>
                   <td>
                     <Link to={`edit/${item._id}`}>
                       <button type="button" className="btn btn-primary">

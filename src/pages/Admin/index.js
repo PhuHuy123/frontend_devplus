@@ -53,7 +53,71 @@ const privateRoutes = [
   {
     path: PRIVATE_ROUTE.IMAGE_SLIDERS_EDIT,
     title: "Admin DevPlus",
-    component: lazy(() => import("@app/pages/Admin/ImageBar/edit")),
+    component: lazy( () => import( "@app/pages/Admin/ImageBar/edit" ) ),
+    //Common Concerns
+  },
+  {
+    path: PRIVATE_ROUTE.CONCERNS,
+    title: "Admin DevPlus",
+    component: lazy(() => import("@app/pages/Admin/CommonConcerns")),
+  },
+  {
+    path: PRIVATE_ROUTE.CONCERNS_CREATE,
+    title: "Admin DevPlus",
+    component: lazy(() => import("@app/pages/Admin/CommonConcerns/create")),
+  },
+  {
+    path: PRIVATE_ROUTE.CONCERNS_EDIT,
+    title: "Admin DevPlus",
+    component: lazy(() => import("@app/pages/Admin/CommonConcerns/edit")),
+  },
+  //Road to be a Devplus
+  {
+    path: PRIVATE_ROUTE.BE_A_DEVPLUS,
+    title: "Admin DevPlus",
+    component: lazy(() => import("@app/pages/Admin/BeADevPlus")),
+  },
+  {
+    path: PRIVATE_ROUTE.BE_A_DEVPLUS_CREATE,
+    title: "Admin DevPlus",
+    component: lazy(() => import("@app/pages/Admin/BeADevPlus/create")),
+  },
+  {
+    path: PRIVATE_ROUTE.BE_A_DEVPLUS_EDIT,
+    title: "Admin DevPlus",
+    component: lazy(() => import("@app/pages/Admin/BeADevPlus/edit")),
+  },
+  //OurMainCamPus
+  {
+    path: PRIVATE_ROUTE.OUR_CAMPUS,
+    title: "Admin DevPlus",
+    component: lazy(() => import("@app/pages/Admin/OurMainCampus")),
+  },
+  {
+    path: PRIVATE_ROUTE.OUR_CAMPUS_CREATE,
+    title: "Admin DevPlus",
+    component: lazy(() => import("@app/pages/Admin/OurMainCampus/create")),
+  },
+  {
+    path: PRIVATE_ROUTE.OUR_CAMPUS_EDIT,
+    title: "Admin DevPlus",
+    component: lazy(() => import("@app/pages/Admin/OurMainCampus/edit")),
+  },
+  //AlumniSaying
+  {
+    path: PRIVATE_ROUTE.ALUMNI,
+    title: "Admin DevPlus",
+    component: lazy(() => import("@app/pages/Admin/AlumniSaying")),
+  },
+  {
+    path: PRIVATE_ROUTE.ALUMNI_CREATE,
+    title: "Admin DevPlus",
+    component: lazy(() => import("@app/pages/Admin/AlumniSaying/create")),
+  },
+  {
+    path: PRIVATE_ROUTE.ALUMNI_EDIT,
+    title: "Admin DevPlus",
+    component: lazy(() => import("@app/pages/Admin/AlumniSaying/edit")),
   },
 ];
 function Admin() {

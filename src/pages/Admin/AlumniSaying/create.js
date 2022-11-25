@@ -1,7 +1,7 @@
 import PageTitle from "@app/components/Admin/PageTitle";
-import Create from "@app/components/Admin/OurMainCampus/create";
+import Create from "@app/components/Admin/AlumniSaying/create";
 
-const CreateOurManCampus = () => {
+const CreateAlumniSaying = () => {
   return (
     <div className="page-content">
       <PageTitle />
@@ -9,4 +9,5 @@ const CreateOurManCampus = () => {
     </div>
   );
 };
-export default CreateOurManCampus;
+export default CreateAlumniSaying;
+

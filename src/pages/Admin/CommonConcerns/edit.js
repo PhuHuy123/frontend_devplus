@@ -1,8 +1,7 @@
+import Edit from "@app/components/Admin/CommonConcerns/edit";
 import PageTitle from "@app/components/Admin/PageTitle";
-import Edit from "@app/components/Admin/BeADevPlus/edit";
-import "@app/style/Crud.scss";
 
-const EditBeADevPlus = () => {
+const EditCommon = () => {
   return (
     <div className="page-content">
       <PageTitle />
@@ -10,5 +9,4 @@ const EditBeADevPlus = () => {
     </div>
   );
 };
-export default EditBeADevPlus;
-
+export default EditCommon;
