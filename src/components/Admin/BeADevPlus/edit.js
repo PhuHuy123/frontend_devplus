@@ -1,26 +1,49 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
+import { getApiRoadToById, putApiRoadToById } from "@app/config/apiService";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import Loader from "../Loader";
 // import { getValue } from "@testing-library/user-event/dist/utils";
-const Edit = ( props ) => {
-const { id}  = useParams();
+const Edit = () => {
+  const { id } = useParams();
+  const [loader, setLoader] = useState( true );
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     mode: "onSubmit",
-    defaultValues: {
-      name: "",
-    },
-  } );
-  useEffect( () => {
-    
+  });
+  useEffect(() => {
+    loadData();
   }, []);
- ;
-  const onSubmit = (data) => {
+
+  const loadData = async () => {
+    const res = await getApiRoadToById(id).catch((err) => {
+      console.log("ERROR", err);
+    } );
+    setValue( "name", res.data.name );
+    setLoader(false);
   };
+   const onSubmit = async (data) => {
+     setLoader(true);
+     
+     const response = await putApiRoadToById( {
+       name: data.name
+     }, id).catch((err) => {
+       console.log( "ERROR", err );
+     } );
+     if (response) {
+       toast.success("Updated Successfully!");
+       navigate("/admin/to-be-a-devplus");
+       setLoader(false);
+     }
+   };
 
   return (
     <div className="content">
@@ -40,12 +63,6 @@ const { id}  = useParams();
               <label htmlFor="exampleInputEmail1" className="form-label">
                 Title
               </label>
-              <input type="text" className="form-control" />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="exampleInputEmail1" className="form-label">
-                Content
-              </label>
               <input
                 type="text"
                 className="form-control"
@@ -54,80 +71,14 @@ const { id}  = useParams();
                 })}
               />
             </div>
-            <div className="mb-3">
-              <label htmlFor="exampleInputPassword1" className="form-label">
-                Your Image
-              </label>
-              <input
-                type="file"
-                className="form-control"
-                {...register("file", {
-                  required: "Please enter your first name.",
-                })}
-              />
-            </div>
             <button type="submit" className="btn btn-primary">
-              Create
+              Update
             </button>
           </form>
         </div>
       </div>
 
-      <div
-        className="modal fade"
-        id="exampleModal"
-        tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Create Slider
-              </h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body">
-              <form>
-                <div className="mb-3">
-                  <label htmlFor="exampleInputEmail1" className="form-label">
-                    Title
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Type your slider title"
-                  />
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="exampleInputPassword1" className="form-label">
-                    Image
-                  </label>
-                  <input type="file" className="form-control" />
-                </div>
-              </form>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <button type="button" className="btn btn-primary">
-                Save changes
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      {loader && <Loader />}
     </div>
   );
 };

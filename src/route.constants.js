@@ -15,11 +15,11 @@ export const PRIVATE_ROUTE = {
 
   IMAGE_SLIDERS: "/image-sliders",
   IMAGE_SLIDERS_CREATE: "/image-sliders/create",
-  IMAGE_SLIDERS_EDIT: "/image-sliders/edit",
+  IMAGE_SLIDERS_EDIT: "/image-sliders/edit/:id",
 
   BE_A_DEVPLUS: "/to-be-a-devplus",
   BE_A_DEVPLUS_CREATE: "/to-be-a-devplus/create",
-  BE_A_DEVPLUS_EDIT: "/to-be-a-devplus/edit",
+  BE_A_DEVPLUS_EDIT: "/to-be-a-devplus/edit/:id",
 
   EDU_PROGRAM: "/edu-program",
   EDU_PROGRAM_CREATE: "/edu-program/create",
@@ -27,13 +27,13 @@ export const PRIVATE_ROUTE = {
 
   OUR_CAMPUS: "/our-main-campus",
   OUR_CAMPUS_CREATE: "/our-main-campus/create",
-  OUR_CAMPUS_EDIT: "/our-main-campus/edit",
+  OUR_CAMPUS_EDIT: "/our-main-campus/edit/:id",
 
   CONCERNS: "/common-concerns",
   CONCERNS_CREATE: "/common-concerns/create",
-  CONCERNS_EDIT: "/common-concerns/edit",
+  CONCERNS_EDIT: "/common-concerns/edit/:id",
 
   ALUMNI: "/alumni-saying",
   ALUMNI_CREATE: "/alumni-saying/create",
-  ALUMNI_EDIT: "/alumni-saying/edit",
+  ALUMNI_EDIT: "/alumni-saying/edit/:id",
 };
