@@ -17,9 +17,27 @@ const deleteApiSkills = ( data ) => {
 const getApiRoadTo = () => {
   return axios.get("/roadtos");
 };
+
+const getApiSlideImage = () => {
+  return axios.get( '/menubars' )
+  
+}
+const postApiSlideImage = ( data ) => {
+  return axios.post("/menubars", data, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+}
+
+const deleteApiSlideImage = ( data ) => {
+return axios.delete("/menubars", data);
+};
 export {
   getApiSkills,
   postApiSkills,
   deleteApiSkills,
   getApiRoadTo,
+
+  getApiSlideImage,
+  postApiSlideImage,
+  deleteApiSlideImage,
 };

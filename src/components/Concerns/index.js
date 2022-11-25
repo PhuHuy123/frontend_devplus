@@ -5,7 +5,6 @@ const Concerns = () => {
   const handleOpenVideo =()=>{
     setVideo(!video)
   }
-  console.log(video)
   return (
     <div className="common-concerns container">
       <div className="row px-0">

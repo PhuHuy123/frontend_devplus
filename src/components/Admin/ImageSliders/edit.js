@@ -19,7 +19,6 @@ const { id}  = useParams();
   }, []);
  ;
   const onSubmit = (data) => {
-    
   };
 
   return (
