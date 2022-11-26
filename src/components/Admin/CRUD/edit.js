@@ -8,7 +8,7 @@ const Edit = () => {
           <h5 className="card-title">Special title treatment</h5>
           <Link to="/" className="rightBtn">
             <button type="button" className="btn btn-success">
-              <i className="fa-solid fa-plus"></i> Back
+            <i className="fa-solid fa-arrow-right"></i> Back
             </button>
           </Link>
           <form>

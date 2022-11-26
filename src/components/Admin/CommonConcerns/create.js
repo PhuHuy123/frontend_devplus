@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { postApiConcerns } from "@app/config/apiService";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import Loader from "../Loader";
 
 const Create = () => {
   const [loader, setLoader] = useState(false);
@@ -45,7 +46,7 @@ const Create = () => {
             Create Common Concerns
             <Link to="/admin/common-concerns" className="rightBtn">
               <button type="button" className="btn btn-success">
-                <i className="fa-solid fa-plus"></i> Back
+              <i className="fa-solid fa-arrow-right"></i> Back
               </button>
             </Link>
           </div>
@@ -82,14 +83,8 @@ const Create = () => {
             </form>
           </div>
         </div>
+      { loader && <Loader />}
       </div>
-      {loader && (
-        <div className="d-flex justify-content-center loader">
-          <div className="spinner-border loader-icon" role="status">
-            <span class="visually-hidden">Loading...</span>
-          </div>
-        </div>
-      )}
     </>
   );
 };

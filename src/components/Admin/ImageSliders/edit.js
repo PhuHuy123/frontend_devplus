@@ -60,7 +60,7 @@ const Edit = () => {
           Edit
           <Link to="/admin/edu-program" className="rightBtn">
             <button type="button" className="btn btn-success">
-              <i className="fa-solid fa-plus"></i> Back
+            <i className="fa-solid fa-arrow-right"></i> Back
             </button>
           </Link>
         </div>

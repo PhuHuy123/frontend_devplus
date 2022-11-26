@@ -59,7 +59,7 @@ const Edit = ( props ) => {
           Edit
           <Link to="/admin/alumni-saying" className="rightBtn">
             <button type="button" className="btn btn-success">
-              <i className="fa-solid fa-plus"></i> Back
+            <i className="fa-solid fa-arrow-right"></i>  Back
             </button>
           </Link>
         </div>
@@ -109,9 +109,7 @@ const Edit = ( props ) => {
               <input
                 type="file"
                 className="form-control"
-                {...register("image", {
-                  required: "Please enter your first name.",
-                })}
+                {...register("image")}
               />
             </div>
             <div className="mb-3 show-image">

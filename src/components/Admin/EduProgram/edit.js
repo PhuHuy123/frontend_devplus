@@ -32,7 +32,7 @@ const Edit = ( props ) => {
     } );
     setValue( 'name', res.data.name);
     setValue( "description", res.data.description );
-    setValue("image", res.data.image);
+    // setValue("image", res.dat  a.image);
     setLoader( false );
     setImg(res.data.image)
     } ;
@@ -61,7 +61,7 @@ const Edit = ( props ) => {
           Edit
           <Link to="/admin/edu-program" className="rightBtn">
             <button type="button" className="btn btn-success">
-              <i className="fa-solid fa-plus"></i> Back
+            <i className="fa-solid fa-arrow-right"></i> Back
             </button>
           </Link>
         </div>
@@ -99,9 +99,7 @@ const Edit = ( props ) => {
               <input
                 type="file"
                 className="form-control"
-                {...register("image", {
-                  required: "Please enter your first name.",
-                })}
+                {...register("image")}
               />
             </div>
             <div className="mb-3 show-image">

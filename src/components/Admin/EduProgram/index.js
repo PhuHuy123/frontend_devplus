@@ -2,11 +2,9 @@ import { Link } from "react-router-dom";
 import { getApiSkills, deleteApiSkills } from "@app/config/apiService";
 import { toast } from "react-toastify";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 const Show = () => {
   const [data, setData] = useState( [] ); 
   const [del, setDel] = useState( null );
-  const navigate = useNavigate();
 
   const handleDelete = async () => {
     const response = await deleteApiSkills( del).catch((err) => {
@@ -33,7 +31,7 @@ const Show = () => {
     <div className="content">
       <div className="card">
         <div className="card-header">
-          List Education Program
+            
           <Link to="create" className="rightBtn">
             <button type="button" className="btn btn-success">
               <i className="fa-solid fa-plus"></i> Add New
